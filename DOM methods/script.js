@@ -48,6 +48,17 @@ function filterOnlyMillionaires() {
   updateDOM();
 }
 
+function getSumOfAllWealth() {
+  const total = userArray.reduce((acc, user) => (acc += user.money), 0);
+  console.log(total);
+  const wealthElement = document.createElement("div");
+  wealthElement.innerHTML = `<h3>Total wealth: <strong>${formatMoney(
+    total
+  )}</strong></h3>`;
+  main.appendChild(wealthElement);
+  //   updateDOM();
+}
+
 function addDataToArray(obj) {
   userArray.push(obj);
 
@@ -55,7 +66,7 @@ function addDataToArray(obj) {
 }
 
 function updateDOM(providedData = userArray) {
-  main.innerHTML = "<h2><strong>Person</strong>Wealth</h2>";
+  main.innerHTML = "<h2><strong>Person</strong>Wealth</h3>";
 
   providedData.forEach((person) => {
     const element = document.createElement("div");
@@ -77,3 +88,4 @@ addUserButton.addEventListener("click", getRandomUser);
 doubleButton.addEventListener("click", doubleMoney);
 sortButton.addEventListener("click", sortByRichest);
 showMillionairesButton.addEventListener("click", filterOnlyMillionaires);
+calculateWealthButton.addEventListener("click", getSumOfAllWealth);
