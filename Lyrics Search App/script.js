@@ -15,10 +15,14 @@ async function searchSong(term) {
 async function getLyrics(artist, songTitle) {
   const response = await fetch(`${apiUrl}/v1/${artist}/${songTitle}`);
   const data = await response.json();
-  const lyrics = data.lyrics.replace(/(\r\n|\r|\n)/g, "<br>");
-  result.innerHTML = `<h2><strong>${artist}</strong> - ${songTitle}</h2>
-  <span>${lyrics}</span>`;
-  more.innerHTML = "";
+  if (data.lyrics) {
+    const lyrics = data.lyrics.replace(/(\r\n|\r|\n)/g, "<br>");
+    result.innerHTML = `<h2><strong>${artist}</strong> - ${songTitle}</h2>
+      <span>${lyrics}</span>`;
+    more.innerHTML = "";
+  } else {
+    alert("Sorry we dont have lyrics in db");
+  }
 }
 
 function showData(data) {
